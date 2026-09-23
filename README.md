@@ -160,7 +160,11 @@ python demo.py toc <접수번호>        # 파싱된 목차 확인 (data/raw 에
 | 답변이 "확인되지 않습니다" | 검색이 빗나간 경우. 질문에 보고서 종류·연도·섹션 키워드(배당, 최대주주 등)를 넣으면 개선 |
 | 임베더 변경 후 결과 이상 | `data/vectordb` 삭제 후 재 `ingest` (임베더가 다르면 기존 인덱스를 자동 무시) |
 
-## 9. 확장 포인트
+## 9. 문맥이 애매한 질문 처리 로드맵
+현재 검색은 질문 어휘가 공시 원문과 일치할 때만 안정적이다(기본 임베딩이 해싱 n-gram). 동의어·개념형·서술형 질문을 처리하도록 바꾸는 방법과 적용 순서는
+**[docs/ROADMAP_ambiguous_queries.md](docs/ROADMAP_ambiguous_queries.md)** 참고.
+
+## 10. 확장 포인트
 - 임베딩 교체: `store.py` 의 `Embedder` 클래스(`embed(texts)->ndarray`, `name`, `dim`) 하나만 구현 — bge-m3, Gemini, Upstage 등
 - 벡터 스토어 교체: `VectorStore.add/search` 를 Chroma/Qdrant/pgvector 로
 - LLM 교체: `rag.py` 의 `DartRAG.__init__` 에서 OpenAI 호환 `base_url` 만 바꾸면 Ollama/vLLM/Together 등 그대로 사용
